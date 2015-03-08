@@ -27,11 +27,12 @@ if(!empty($_POST))
 	        $_SERVER["REMOTE_ADDR"],
 	        $_POST["g-recaptcha-response"]
 	    );
+		if (!($resp != null && $resp->success)) {
+    		$errors[] = lang("CAPTCHA_FAIL");
+		}
 	}
 
-	if (!($resp != null && $resp->success)) {
-    	$errors[] = lang("CAPTCHA_FAIL");
-	}
+	
 	
 	if(minMaxRange(5,25,$username))
 	{
@@ -44,6 +45,7 @@ if(!empty($_POST))
 	{
 		$errors[] = lang("ACCOUNT_DISPLAY_CHAR_LIMIT",array(5,25));
 	}
+
 	if(!ctype_alnum($displayname)){
 		$errors[] = lang("ACCOUNT_DISPLAY_INVALID_CHARACTERS");
 	}
@@ -51,6 +53,17 @@ if(!empty($_POST))
 	{
 		$errors[] = lang("ACCOUNT_PASS_CHAR_LIMIT",array(8,50));
 	}
+	if(!preg_match('/[A-Z]/',$password ))
+	{
+ 		$errors[] = lang("ACCOUNT_PASS_CHAR_UPPERCASE");
+ 	}	
+
+ 		if( !preg_match("#[0-9]+#",$password )) 
+ 	{
+		$errors[] = lang("ACCOUNT_PASS_SPECIAL_CHAR");
+	}
+	
+
 	else if($password != $confirm_pass)
 	{
 		$errors[] = lang("ACCOUNT_PASS_MISMATCH");

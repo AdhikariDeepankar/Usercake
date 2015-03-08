@@ -13,6 +13,17 @@ if(isUserLoggedIn())
 	$loggedInUser->userLogOut();
 }
 
+//log the user out if logged in through google login
+if(isset($_SESSION['access_token']))
+{
+	$db=new DB;
+	$googleClient = new Google_Client;
+	$auth = new GoogleAuth($db, $googleClient);
+	$auth->logout();
+	header('Location: index.php');
+
+}
+
 if(!empty($websiteUrl)) 
 {
 	$add_http = "";
