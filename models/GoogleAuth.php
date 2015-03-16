@@ -10,9 +10,9 @@
  		$this->db = $db;
  		$this->client = $googleClient;
  
- 		$this->client->setClientId('83830223009-j6fg89flkpgigc1g739ucjoch87cgfhi.apps.googleusercontent.com');
- 		$this->client->setClientSecret('KPrJlxreeijSfZl8l11JzF3E');
-		$this->client->setRedirectUri('http://localhost/Us/index.php');
+ 		$this->client->setClientId('256362204593-v2b5mt42rsl6ospfd8ejvl07i4ncb5cm.apps.googleusercontent.com');
+ 		$this->client->setClientSecret('68yIh6rI2Cf8krqevCl4kdE4');
+		$this->client->setRedirectUri('http://localhost/Us/account.php');
  		$this->client->setScopes('email');
 		
 		
@@ -71,3 +71,4 @@
 			";
 			$this->db->query($sql);
 	}
+}
